@@ -1,0 +1,22 @@
+name: Sync Fork
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+
+      - name: Mirror to fork
+        env:
+          FORK_TOKEN: ${{ secrets.FORK_TOKEN }}
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git remote add fork https://mateuskramer:${FORK_TOKEN}@github.com/mateuskramer/2025.2_DEC0013_SIMULADOR-FLUIDOS.git
+          git push fork main --force
