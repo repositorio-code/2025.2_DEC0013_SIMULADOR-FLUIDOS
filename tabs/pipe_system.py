@@ -188,7 +188,10 @@ def render_pipe_system_tab(sidebar_data):
         - **Q**: Vazão volumétrica (m³/s)
         - **ρ**: Densidade do fluido (kg/m³)
         - **g**: Aceleração da gravidade (9.81 m/s²)
+        
+        **Equação de Bernoulli Estendida:**
         """)
+        st.latex(r"\frac{P_1}{\rho g} + \frac{V_1^2}{2g} + z_1 = \frac{P_2}{\rho g} + \frac{V_2^2}{2g} + z_2 + h_L")
         
         st.markdown("""
         ---
@@ -208,9 +211,9 @@ def render_pipe_system_tab(sidebar_data):
         """)
     
     # Vídeo em expander separado
-    with st.expander("🎥 Vídeo - Visualização de Perda de Carga", expanded=False):
+    with st.expander("🎥 Vídeo - Perfil de Pressão", expanded=False):
         st.video("https://youtu.be/HdKrJqJ6nBg?si=PBJA8rdAr0IdY9fy")
-        st.caption("Demonstração prática com piezômetros mostrando a queda de pressão ao longo de uma tubulação")
+        st.caption("Visualização do escoamento laminar")
     
     st.markdown("---")
     
@@ -558,3 +561,4 @@ def _display_losses_by_section(pipe_results):
         
         *A perda total em cada trecho é a soma das três componentes (altura das barras empilhadas).*
         """)
+
