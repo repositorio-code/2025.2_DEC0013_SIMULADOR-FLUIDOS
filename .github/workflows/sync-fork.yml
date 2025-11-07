@@ -1,26 +1,17 @@
-name: Sync Fork
+name: Test Token Access
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  sync:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout source repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # garante histórico completo para espelhar
-
-      - name: Mirror to fork
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+      - name: Check if secret is available
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
-          git remote add fork https://x-access-token:${PAT_TOKEN}@github.com/mateuskramer/2025.2_DEC0013_SIMULADOR-FLUIDOS.git
-          git push fork main --force
-
+          if [ -z "${{ secrets.PAT_TOKEN }}" ]; then
+            echo "❌ O segredo PAT_TOKEN NÃO está definido."
+            exit 1
+          else
+            echo "✅ O segredo PAT_TOKEN está disponível!"
+          fi
