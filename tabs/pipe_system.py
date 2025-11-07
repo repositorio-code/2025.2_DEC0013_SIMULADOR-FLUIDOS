@@ -159,7 +159,38 @@ def render_pipe_system_tab(sidebar_data):
         - **Δz**: Variação de elevação (m)
         - **h_L**: Perda de carga acumulada até o ponto i (m)
         - **g**: Aceleração da gravidade (9.81 m/s²)
+        """)
         
+        # Imagem do Princípio de Bernoulli
+        st.markdown("---")
+        st.markdown("**📐 Diagrama do Princípio de Bernoulli**")
+        
+        try:
+            project_root = Path(__file__).parent.parent
+            image_path = project_root / "assets" / "principio-bernoulli.webp"
+            
+            if image_path.exists():
+                st.image(str(image_path), 
+                        caption="Princípio de Bernoulli - Conservação de Energia em Escoamentos", 
+                        use_column_width=True)
+            else:
+                st.info("Diagrama não disponível. Equações mostradas acima ilustram o princípio.")
+                
+        except Exception as e:
+            st.info("Diagrama não disponível. Equações mostradas acima ilustram o princípio.")
+        
+        st.markdown("""
+        **Legenda das Variáveis:**
+        - **P₁, P₂**: Pressões nos pontos 1 e 2 (Pa)
+        - **V₁, V₂**: Velocidades nos pontos 1 e 2 (m/s)
+        - **h₁, h₂**: Alturas (cota) dos pontos 1 e 2 (m)
+        - **A₁, A₂**: Áreas das seções transversais 1 e 2 (m²)
+        - **Q**: Vazão volumétrica (m³/s)
+        - **ρ**: Densidade do fluido (kg/m³)
+        - **g**: Aceleração da gravidade (9.81 m/s²)
+        """)
+        
+        st.markdown("""
         ---
         
         ### 💡 Como Usar Esta Simulação
@@ -175,6 +206,11 @@ def render_pipe_system_tab(sidebar_data):
         
         5. **Experimente as simulações** na aba correspondente para otimizar seu projeto!
         """)
+    
+    # Vídeo em expander separado
+    with st.expander("🎥 Vídeo - Visualização de Perda de Carga", expanded=False):
+        st.video("https://youtu.be/HdKrJqJ6nBg?si=PBJA8rdAr0IdY9fy")
+        st.caption("Demonstração prática com piezômetros mostrando a queda de pressão ao longo de uma tubulação")
     
     st.markdown("---")
     
@@ -216,73 +252,6 @@ def render_pipe_system_tab(sidebar_data):
     for idx, pipe in enumerate(st.session_state.pipes):
         render_pipe_configuration(pipe, idx)
 
-    st.markdown("---")
-    
-    # Imagem do Princípio de Bernoulli
-    st.markdown('<div class="section-title">📐 Diagrama do Princípio de Bernoulli</div>', unsafe_allow_html=True)
-    
-    try:
-        # Caminho da imagem: sobe um nível de tabs/ para project/, depois entra em assets/
-        project_root = Path(__file__).parent.parent
-        image_path = project_root / "assets" / "principio-bernoulli.webp"
-        
-        
-        if image_path.exists():
-            st.image(str(image_path), 
-                    caption="Princípio de Bernoulli - Conservação de Energia em Escoamentos", 
-                    width=400)
-        else:
-            st.error(f"""
-            **Arquivo de imagem não encontrado!**
-            
-            Procurei em: `{image_path}`
-            
-            Certifique-se de que:
-            1. A pasta `assets/` existe na raiz do projeto
-            2. O arquivo `principio-bernoulli.webp` está dentro de `assets/`
-            """)
-            
-    except Exception as e:
-        st.error(f"""
-        **Erro ao tentar carregar a imagem:**
-        
-        {type(e).__name__}: {str(e)}
-        """)
-        
-        # Mostra o diagrama alternativo em texto
-        st.markdown("""
-        <div class="bernoulli-container">
-            <h3 style="color: #00d4ff; margin-bottom: 1rem;">Princípio de Bernoulli - Conservação de Energia em Escoamentos</h3>
-            
-            <div class="bernoulli-diagram">
-                <div style="margin-bottom: 1rem;">
-                    <strong style="color: #00d4ff;">Ponto 1 → Ponto 2</strong>
-                </div>
-                <div style="background: #2d4059; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
-                    <div>┌─────────────────────────────────────────────────────────┐</div>
-                    <div>│  P₁, V₁, h₁, A₁                  P₂, V₂, h₂, A₂       │</div>
-                    <div>│  ●─────────→ FLUIDO →─────────→ ●                     │</div>
-                    <div>└─────────────────────────────────────────────────────────┘</div>
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-    st.markdown("""
-    **Legenda das Variáveis:**
-    - **P₁, P₂**: Pressões nos pontos 1 e 2 (Pa)
-    - **V₁, V₂**: Velocidades nos pontos 1 e 2 (m/s)
-    - **h₁, h₂**: Alturas (cota) dos pontos 1 e 2 (m)
-    - **A₁, A₂**: Áreas das seções transversais 1 e 2 (m²)
-    - **Q**: Vazão volumétrica (m³/s)
-    - **ρ**: Densidade do fluido (kg/m³)
-    - **g**: Aceleração da gravidade (9.81 m/s²)
-    
-    **Equação de Bernoulli Estendida:**
-    """)
-    st.latex(r"\frac{P_1}{\rho g} + \frac{V_1^2}{2g} + z_1 = \frac{P_2}{\rho g} + \frac{V_2^2}{2g} + z_2 + h_L")
-    
-    
     st.markdown("---")
     st.markdown('<div class="section-title">📊 Resultados do Sistema</div>', unsafe_allow_html=True)
     
@@ -423,36 +392,33 @@ def _display_velocity_warnings(pipe_results, fluid_type):
 
 
 def _display_detailed_table(pipe_results):
-    """Exibe tabela detalhada com resultados por trecho"""
+    """Exibe tabela detalhada com resultados por trecho - TRANSPOSTA"""
     st.markdown("### 📋 Detalhamento por Trecho")
     
-    df_results = pd.DataFrame([{
-        'Trecho': r['id'],
-        'Velocidade (m/s)': f"{r['V']:.2f}",
-        'Reynolds': f"{r['Re']:,.0f}",
-        'Regime': r['regime'],
-        'Fator f': f"{r['f']:.4f}",
-        'K total': f"{r['K_total']:.2f}",
-        'h distribuída (m)': f"{r['h_distributed']:.2f}",
-        'h local (m)': f"{r['h_local']:.2f}",
-        'h elevação (m)': f"{r['h_elevation']:.2f}",
-        'h total (m)': f"{r['h_total']:.2f}",
-        'P entrada (kPa)': f"{r['P_in']/1000:.1f}",
-        'P saída (kPa)': f"{r['P_out']/1000:.1f}"
-    } for r in pipe_results])
+    # Criar dicionário onde cada trecho é uma coluna
+    data = {}
+    
+    for r in pipe_results:
+        trecho_name = f"Trecho {r['id']}"
+        data[trecho_name] = {
+            'Velocidade (m/s)': f"{r['V']:.2f}",
+            'Reynolds': f"{r['Re']:,.0f}",
+            'Regime': r['regime'],
+            'Fator f': f"{r['f']:.4f}",
+            'K total': f"{r['K_total']:.2f}",
+            'h distribuída (m)': f"{r['h_distributed']:.2f}",
+            'h local (m)': f"{r['h_local']:.2f}",
+            'h elevação (m)': f"{r['h_elevation']:.2f}",
+            'h total (m)': f"{r['h_total']:.2f}",
+            'P entrada (kPa)': f"{r['P_in']/1000:.1f}",
+            'P saída (kPa)': f"{r['P_out']/1000:.1f}"
+        }
+    
+    # Criar DataFrame transposto
+    df_results = pd.DataFrame(data)
     
     st.dataframe(df_results, use_container_width=True)
-    
-    # Vídeo explicativo
-    st.markdown("### 🎥 Vídeo Explicativo - Perfil de Pressão")
-    
-    # Container estilizado para o vídeo
-    st.markdown('<div class="video-container">', unsafe_allow_html=True)
-    st.video("https://youtu.be/HdKrJqJ6nBg?si=PBJA8rdAr0IdY9fy")
-    st.markdown("""
-    **Vídeo:** Explicação sobre perfil de pressão em sistemas de tubulações
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
+
 
 def _display_pressure_profile(pipe_results, pipes):
     """Exibe gráfico de perfil de pressão ao longo do sistema"""
@@ -516,7 +482,7 @@ def _display_pressure_profile(pipe_results, pipes):
         
         - **Eixo X (horizontal)**: Posição ao longo do sistema em metros
         - **Eixo Y (vertical)**: Pressão em kPa em cada ponto
-        - **Inclinação da curva**: Quanto mais inclinada (descendente), maior a perda de pressão naquele trecho[web:2]
+        - **Inclinação da curva**: Quanto mais inclinada (descendente), maior a perda de pressão naquele trecho
         - **Quedas bruscas**: Indicam perdas localizadas significativas (válvulas, curvas, mudanças de diâmetro)
         - **Inclinação suave**: Indica perda distribuída por atrito ao longo do tubo
         
@@ -529,7 +495,6 @@ def _display_pressure_profile(pipe_results, pipes):
         *Na prática, se você instalasse tubos verticais (piezômetros) ao longo da tubulação, 
         a água subiria até as alturas mostradas neste gráfico.*
         """)
-
 
 
 def _display_losses_by_section(pipe_results):
@@ -570,12 +535,12 @@ def _display_losses_by_section(pipe_results):
         **Tipos de perda (cores):**
         
         - 🔵 **Perda Distribuída (azul)**: Causada pelo **atrito do fluido com as paredes** ao longo 
-          de todo o comprimento do tubo. Calculada pela equação de Darcy-Weisbach[web:6]:
+          de todo o comprimento do tubo. Calculada pela equação de Darcy-Weisbach:
           - Aumenta com: comprimento do tubo, rugosidade da parede, velocidade do fluido
           - Diminui com: maior diâmetro do tubo
         
         - 🟢 **Perda Localizada (verde)**: Causada pela **turbulência em acessórios** como válvulas, 
-          curvas, expansões e contrações[web:2]:
+          curvas, expansões e contrações:
           - Cada acessório tem um coeficiente K característico
           - Proporcionais ao quadrado da velocidade (V²/2g)
           - Não dependem do comprimento do tubo
