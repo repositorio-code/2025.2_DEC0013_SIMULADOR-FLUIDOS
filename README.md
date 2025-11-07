@@ -9,7 +9,7 @@ Este projeto possui **dois repositórios sincronizados**:
 - 💠 **Repositório oficial** (organização): utilizado para o desenvolvimento em grupo.  
 - 🚀 **Repositório de deploy** (pessoal): usado apenas para hospedar o aplicativo no Streamlit Cloud, que exige um repositório pessoal.  
 
-🔗 Acesse o aplicativo em: [https://2025-2-dec0013-simulador-fluidos.streamlit.app](https://2025-2-dec0013-simulador-fluidos.streamlit.app)
+🔗 Acesse o aplicativo em: [https://simulafluidos.streamlit.app](https://simulafluidos.streamlit.app)
 
 ## 📋 Descrição
 
