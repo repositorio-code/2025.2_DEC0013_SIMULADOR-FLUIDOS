@@ -5,6 +5,12 @@ Aplicação web interativa para análise completa de sistemas de escoamento em t
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.31.0-red)
 
+Este projeto possui **dois repositórios sincronizados**:
+- 💠 **Repositório oficial** (organização): utilizado para o desenvolvimento em grupo.  
+- 🚀 **Repositório de deploy** (pessoal): usado apenas para hospedar o aplicativo no Streamlit Cloud, que exige um repositório pessoal.  
+
+🔗 Acesse o aplicativo em: [https://2025-2-dec0013-simulador-fluidos.streamlit.app](https://2025-2-dec0013-simulador-fluidos.streamlit.app)
+
 ## 📋 Descrição
 
 Esta aplicação permite realizar simulações avançadas de escoamento de fluidos em sistemas de tubulações em série, incluindo:
