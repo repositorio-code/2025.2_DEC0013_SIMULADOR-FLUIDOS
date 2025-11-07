@@ -23,3 +23,4 @@ jobs:
           git config --global user.name "GitHub Action"
           git remote add fork https://x-access-token:${PAT_TOKEN}@github.com/mateuskramer/2025.2_DEC0013_SIMULADOR-FLUIDOS.git
           git push fork main --force
+
