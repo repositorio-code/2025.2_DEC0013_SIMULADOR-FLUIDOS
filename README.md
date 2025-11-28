@@ -87,6 +87,47 @@ project/
     ├── simulations.py         # Simulações
     └── about.py               # Informações
 ```
+## 📸 Capturas de Tela
+
+### Tela Inicial
+[Tela Principal Completa](docs/media/tela_principal_completa.png)
+
+*Tela principal do sistema com sidebar de configurações: seleção de fluido, temperatura, pressão inicial e propriedades calculadas automaticamente*
+
+### Configuração de Trecho
+![Parâmetros do Tubo e Acessórios](docs/media/config_trecho.png)
+
+*Interface para configurar parâmetros do tubo (material, diâmetro, comprimento, desnível) e acessórios/singularidades (contrações, expansões, curvas, válvulas, tês)*
+
+### Fluxo de Resultados
+![Resultados do Sistema](docs/media/resultados_1.png)
+
+![Gráficos e Análises](docs/media/resultados_2.png)
+
+![Detalhamento](docs/media/resultados_3.png)
+
+![Perfil de Pressão](docs/media/resultados_4.png)
+
+*Sequência completa mostrando os resultados do sistema: vazão, perdas, pressões, tabelas detalhadas e gráficos interativos*
+
+### Aba Simulações
+![Simulação de Vazão](docs/media/simulacao_1.png)
+
+![Comparação de Materiais](docs/media/simulacao_2.png)
+
+![Análise de Pressão](docs/media/simulacao_3.png)
+
+*Interfaces de simulações avançadas: variação de vazão, comparação entre materiais e análise de pressão de entrada*, consulte:
+
+📄 **[docs/PI-Docs.pdf](docs/PI-Docs.pdf)** - Documento técnico completo
+
+**Conteúdo do documento:**
+- Descrição geral e funcionalidades
+- Ambiente de desenvolvimento e dependências
+- Instalação e configuração
+- Estrutura do código
+- Interface do usuário
+- Testes e validação
 
 ## 📊 Métodos de Cálculo
 
