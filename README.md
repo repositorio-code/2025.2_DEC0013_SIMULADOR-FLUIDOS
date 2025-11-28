@@ -65,6 +65,20 @@ project/
 ├── requirements.txt            # Dependências do projeto
 ├── README.md                   # Documentação
 │
+├── docs/                       # 📚 Documentação e mídia
+│   ├── PI-Docs.pdf            # Documento técnico completo
+│   └── media/                 # Capturas de tela do sistema
+│       ├── tela_inicial.png
+│       ├── sidebar_config.png
+│       ├── config_trecho.png
+│       ├── resultados_1.png
+│       ├── resultados_2.png
+│       ├── resultados_3.png
+│       ├── resultados_4.png
+│       ├── simulacao_1.png
+│       ├── simulacao_2.png
+│       └── simulacao_3.png
+│
 ├── config/                     # Configurações
 │   ├── __init__.py
 │   └── settings.py            # Constantes e configurações gerais
